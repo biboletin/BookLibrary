@@ -18,57 +18,57 @@ class User
         $this->dbs = $db;
     }
 
-    public function setUsername($username)
+    public function setUsername($username = ''): void
     {
         $this->username = $username;
     }
 
-    public function setFirstName($firstName)
+    public function setFirstName($firstName = ''): void
     {
         $this->firstName = $firstName;
     }
 
-    public function setLastName($lastName)
+    public function setLastName($lastName = ''): void
     {
         $this->lastName = $lastName;
     }
 
-    public function setEmail($email)
+    public function setEmail($email = ''): void
     {
         $this->email = $email;
     }
 
-    public function setPassword($password)
+    public function setPassword($password = ''): void
     {
         $this->password = $password;
     }
 
-    public function getUsername(): String
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    public function getFirstName(): String
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    public function geLastName(): String
+    public function geLastName(): string
     {
         return $this->lastName;
     }
 
-    public function getEmail(): String
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function getPassword(): String
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function checkUserExists($username, $password)
+    public function checkUserExists($username, $password): bool
     {
         $sql = "SELECT 
                     id
@@ -86,7 +86,7 @@ class User
         return true;
     }
 
-    public function addUser()
+    public function addUser(): bool
     {
         $sql = "INSERT INTO users(`username`, `first_name`, `last_name`, `password`, `email`) 
                     VALUES(
@@ -100,18 +100,34 @@ class User
         return $this->checkUserExists($this->username, $this->password);
     }
 
-    public function getUser($id = 0)
+    public function getUser($id = 0): array
     {
         $sql = "SELECT 
                         username,
                         first_name,
                         last_name,
-                        `password`,
                         email 
                     FROM
                         users 
                     WHERE id = '" . $id . "'";
-        error_log($sql);
+        return $this->dbs->sqlQuery($sql);
+    }
+
+    public function editUser(): bool
+    {
+        $sql = "UPDATE 
+                        users 
+                    SET
+                        username = '" . $this->username . "',
+                        first_name = '" . $this->firstName . "',
+                        last_name = '" . $this->lastName . "',";
+        if (($this->password != '') || ($this->password != null)) {
+            $sql .= "`password` = '" . $this->password . "',";
+        }
+        $sql .= "email = '" . $this->email . "'
+                    WHERE id = '" . \Biboletin\Session::get('user') . "' 
+                    LIMIT 1 ";
+        return $this->dbs->sqlQuery($sql);
     }
 
     public function __destruct()

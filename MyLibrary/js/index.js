@@ -16,7 +16,7 @@ $(document).ready(function () {
             alert('Password is empty or less than 6 symbols!');
             return false;
         }
-        $.post('php/ajaxResults.php', $('#login_form').serialize() + '&action=login')
+        $.post('php/ajaxUsersResults.php', $('#login_form').serialize() + '&action=login')
             .done(function (response) {
                 let data = JSON.parse(response);
                 if(data.response !== true){

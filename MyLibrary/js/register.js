@@ -38,7 +38,7 @@ $(document).ready(function () {
             alert('Password and confirm password fields do not match!');
             return false;
         }
-        $.post('php/ajaxResults.php', $('#register_form').serialize() + '&action=register')
+        $.post('php/ajaxUsersResults.php', $('#register_form').serialize() + '&action=register')
             .done(function (response) {
                 let data = JSON.parse(response);
 

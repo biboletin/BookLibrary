@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="center_div">
                     <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-                    <form id="register_form" method="post">
+                    <form id="edituser_form" method="post">
                         <label for="first_name" class="sr-only">First name:</label>
                         <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First name"/>
 
@@ -25,9 +25,6 @@
 
                         <label for="confirm_password" class="sr-only">Confirm password:</label>
                         <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm password"/>
-                        <?php
-                        var_dump($_SESSION);
-                        ?>
                         <hr/>
                         <input type="button" id="edit" class="btn btn-primary" value="Edit"/>
                     </form>
@@ -36,5 +33,6 @@
         </div>
     </div>
 </main>
+<script src="js/editProfile.js"></script>
 </body>
 </html>

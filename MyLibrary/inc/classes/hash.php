@@ -20,6 +20,9 @@ class StringHasher
 
     public function hashit($stringForHash)
     {
+        if(($stringForHash === '') || ($stringForHash === null)){
+            return '';
+        }
         $hash = $stringForHash . $this->salt;
 
         if ($this->algorithm === 'md5') {
