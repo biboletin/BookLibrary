@@ -41,6 +41,11 @@ $(document).ready(function () {
         $.post('php/ajaxResults.php', $('#register_form').serialize() + '&action=register')
             .done(function (response) {
                 let data = JSON.parse(response);
+
+                if(data.response === false){
+                    alert('Unexpected error with adding user(Existing user)!');
+                    return false;
+                }
                 if(data.response === true){
                     window.location.href = 'home.php';
                 }

@@ -10,6 +10,7 @@ class User
     private $lastName;
     private $email;
     private $password;
+    private $id;
     private $dbs;
 
     public function __construct($db)
@@ -84,7 +85,8 @@ class User
         \Biboletin\Session::set('user', $result[0]['id']);
         return true;
     }
-    public function addUser(): bool
+
+    public function addUser()
     {
         $sql = "INSERT INTO users(`username`, `first_name`, `last_name`, `password`, `email`) 
                     VALUES(
@@ -94,8 +96,24 @@ class User
                         '" . $this->password . "', 
                         '" . $this->email . "'
                     )";
-        return $this->dbs->sqlQuery($sql);
+        $this->dbs->sqlQuery($sql);
+        return $this->checkUserExists($this->username, $this->password);
     }
+
+    public function getUser($id = 0)
+    {
+        $sql = "SELECT 
+                        username,
+                        first_name,
+                        last_name,
+                        `password`,
+                        email 
+                    FROM
+                        users 
+                    WHERE id = '" . $id . "'";
+        error_log($sql);
+    }
+
     public function __destruct()
     {
         $this->firstName = null;

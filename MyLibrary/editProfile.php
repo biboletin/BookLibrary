@@ -25,7 +25,9 @@
 
                         <label for="confirm_password" class="sr-only">Confirm password:</label>
                         <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm password"/>
-
+                        <?php
+                        var_dump($_SESSION);
+                        ?>
                         <hr/>
                         <input type="button" id="edit" class="btn btn-primary" value="Edit"/>
                     </form>
