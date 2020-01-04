@@ -27,7 +27,7 @@ class StringHasher
         }
 
         if ($this->algorithm == 'crypt') {
-            return crypt($hash);
+            return crypt($hash, $this->salt);
         }
         return hash($this->algorithm, $hash);
     }

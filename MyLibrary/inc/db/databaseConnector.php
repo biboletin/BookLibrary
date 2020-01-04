@@ -1,8 +1,8 @@
 <?php
-include "interfaces/SQLQuery.php";
-include "databases/MySQLConnection.php";
-include "databases/MySQLiConnection.php";
-include "databases/PDOConnection.php";
+include_once "interfaces/SQLQuery.php";
+include_once "databases/MySQLConnection.php";
+include_once "databases/MySQLiConnection.php";
+include_once "databases/PDOConnection.php";
 
 /**
  * Клас за свързване с MySQL

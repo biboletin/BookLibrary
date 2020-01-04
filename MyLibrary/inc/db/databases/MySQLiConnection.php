@@ -58,19 +58,20 @@ class MySQLiConnection implements SQLQuery
         if (!function_exists("mysqli_connect")) {
             die("Активирайте MySQLi разширението!");
         }
+
         self::$connection = new mysqli(
-            DB_HOST_ADDRESS,
-            DB_USER,
-            DB_PASSWORD
+            \Biboletin\Config::get('mysql', 'host'),
+            \Biboletin\Config::get('mysql', 'user'),
+            \Biboletin\Config::get('mysql', 'password')
         );
         if (mysqli_connect_error()) {
             die("Грешка: " . mysqli_error(self::$connection));
         }
 
-        if (!mysqli_select_db(self::$connection, DB_DATABASE_NAME)) {
+        if (!mysqli_select_db(self::$connection, \Biboletin\Config::get('mysql', 'database'))) {
             die("Грешка: " . mysqli_error(self::$connection));
         }
-        self::$connection->query("SET CHARACTER SET " . DATABASE_CHARSET);
+        self::$connection->query("SET CHARACTER SET " . \Biboletin\Config::get('mysql', 'charset'));
         return self::$connection;
     }
 
@@ -86,29 +87,22 @@ class MySQLiConnection implements SQLQuery
     public function sqlQuery($sql)
     {
         if (($sql === null) || ($sql === "")) {
-            throw new Exception("Празна заявка!");
+            throw new Exception('Празна заявка!');
         }
-        $action = explode(" ", strtolower(trim($sql)));
-        $result = array();
+        $action = explode(' ', strtolower(trim($sql)));
+        $result = [];
 
-        if ($action[0] !== "select") {
+        if ($action[0] !== 'select') {
             return (bool) self::$connection->query($sql);
         }
 
-        if ($action[0] === "select") {
-            if (!self::$connection->query($sql)) {
-                return false;
-            }
-
+        if ($action[0] === 'select') {
             $query = self::$connection->query($sql);
-            if ($query->num_rows === 0) {
-                return false;
-            }
 
             while ($row = $query->fetch_assoc()) {
                 $result[] = $row;
             }
-            return $result;
         }
+        return $result;
     }
 }

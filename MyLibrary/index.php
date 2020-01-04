@@ -1,6 +1,5 @@
 <?php
 include_once "inc/classes/session.php";
-include_once "inc/classes/token.php";
 
 \Biboletin\Session::start();
 ?>
@@ -25,8 +24,7 @@ include_once "inc/classes/token.php";
     <div class="row">
         <div class="center_div">
             <h1 class="h3 mb-3 font-weight-normal">My Library</h1>
-            <form action="" method="post">
-                <input type="hidden" name="<?php echo \Biboletin\Token::generateToken(); ?>">
+            <form id="login_form" method="post">
                 <label for="username" class="sr-only">User name:</label>
                 <input type="text" name="username" id="username" class="form-control" placeholder="Username"/>
 

@@ -4,22 +4,26 @@ namespace Biboletin;
 class Config
 {
     private static $config = [
-        "mysql" => [
-            "host" => "127.0.0.1",
-            "user" => "root",
-            "password" => "",
-            "database" => "book_library",
-            "port" => 3306,
+        'mysql' => [
+            'host' => 'localhost',
+            'user' => 'root',
+            'password' => '',
+            'database' => 'my_library',
+            'port' => 3306,
+            'charset' => 'utf8',
         ],
+        'hashing' => [
+            'salt' => 'MyLibrary'
+        ]
     ];
 
     public static function get($key, $value): string
     {
         if (!isset(self::$config[$key])) {
-            return "";
+            return '';
         }
         if (!isset(self::$config[$key][$value])) {
-            return "";
+            return '';
         }
         return self::$config[$key][$value];
     }
