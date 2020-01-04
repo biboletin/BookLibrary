@@ -1,8 +1,3 @@
-<?php
-include_once "inc/classes/session.php";
-
-\Biboletin\Session::start();
-?>
 <!doctype html>
 <html lang="en">
 <head>

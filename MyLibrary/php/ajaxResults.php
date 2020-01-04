@@ -2,17 +2,12 @@
 include_once '../inc/classes/config.php';
 include_once '../inc/classes/filter.php';
 include_once '../inc/classes/session.php';
-include_once '../inc/classes/token.php';
 include_once '../inc/classes/hash.php';
 include_once '../inc/classes/user.php';
 include_once '../inc/db/databaseConnector.php';
 
-\Biboletin\Session::start();
-
 $filter = new \Biboletin\Filter();
-
 $action = $filter->sanitizeInput(strtolower(trim($_POST['action'])));
-
 $dbs = new \DataBaseConnector();
 $mysqli = $dbs->setEngine('mysqli')->makeConnection();
 
@@ -45,6 +40,7 @@ if ($action === 'register') {
     $user->setEmail($email);
     $user->setPassword($password);
     $user->addUser();
-    $data['response'] = ['password' => $user->getPassword()];
+    $data['response'] = true;
+//    \Biboletin\Session::set('loggedIn', true);
     echo json_encode($data);
 }
