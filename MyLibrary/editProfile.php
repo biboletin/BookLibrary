@@ -21,7 +21,7 @@
                         <input type="text" name="email" id="email" class="form-control" placeholder="Email"/>
 
                         <label for="password" class="sr-only">New password:</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="New assword"/>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="New password"/>
 
                         <label for="confirm_password" class="sr-only">Confirm password:</label>
                         <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm password"/>

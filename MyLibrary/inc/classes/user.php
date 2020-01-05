@@ -3,71 +3,136 @@
 
 namespace Biboletin;
 
+/**
+ * Class User
+ * @package Biboletin
+ */
 class User
 {
+    /**
+     * @var
+     */
     private $username;
+    /**
+     * @var
+     */
     private $firstName;
+    /**
+     * @var
+     */
     private $lastName;
+    /**
+     * @var
+     */
     private $email;
+    /**
+     * @var
+     */
     private $password;
+    /**
+     * @var
+     */
     private $id;
+    /**
+     * @var
+     */
     private $dbs;
 
+    /**
+     * User constructor.
+     * @param $db
+     */
     public function __construct($db)
     {
         $this->dbs = $db;
     }
 
+    /**
+     * @param string $username
+     */
     public function setUsername($username = ''): void
     {
         $this->username = $username;
     }
 
+    /**
+     * @param string $firstName
+     */
     public function setFirstName($firstName = ''): void
     {
         $this->firstName = $firstName;
     }
 
+    /**
+     * @param string $lastName
+     */
     public function setLastName($lastName = ''): void
     {
         $this->lastName = $lastName;
     }
 
+    /**
+     * @param string $email
+     */
     public function setEmail($email = ''): void
     {
         $this->email = $email;
     }
 
+    /**
+     * @param string $password
+     */
     public function setPassword($password = ''): void
     {
         $this->password = $password;
     }
 
+    /**
+     * @return string
+     */
     public function getUsername(): string
     {
         return $this->username;
     }
 
+    /**
+     * @return string
+     */
     public function getFirstName(): string
     {
         return $this->firstName;
     }
 
+    /**
+     * @return string
+     */
     public function geLastName(): string
     {
         return $this->lastName;
     }
 
+    /**
+     * @return string
+     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
+    /**
+     * @return string
+     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
+    /**
+     * @param $username
+     * @param $password
+     * @return bool
+     * @throws \Exception
+     */
     public function checkUserExists($username, $password): bool
     {
         $sql = "SELECT 
@@ -86,6 +151,10 @@ class User
         return true;
     }
 
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     public function addUser(): bool
     {
         $sql = "INSERT INTO users(`username`, `first_name`, `last_name`, `password`, `email`) 
@@ -100,6 +169,10 @@ class User
         return $this->checkUserExists($this->username, $this->password);
     }
 
+    /**
+     * @param int $id
+     * @return array
+     */
     public function getUser($id = 0): array
     {
         $sql = "SELECT 
@@ -113,6 +186,10 @@ class User
         return $this->dbs->sqlQuery($sql);
     }
 
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     public function editUser(): bool
     {
         $sql = "UPDATE 
@@ -130,6 +207,9 @@ class User
         return $this->dbs->sqlQuery($sql);
     }
 
+    /**
+     *
+     */
     public function __destruct()
     {
         $this->firstName = null;

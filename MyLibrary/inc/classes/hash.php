@@ -20,7 +20,7 @@ class StringHasher
 
     public function hashit($stringForHash)
     {
-        if(($stringForHash === '') || ($stringForHash === null)){
+        if (($stringForHash === '') || ($stringForHash === null)) {
             return '';
         }
         $hash = $stringForHash . $this->salt;

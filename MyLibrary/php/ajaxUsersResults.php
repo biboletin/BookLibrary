@@ -11,13 +11,21 @@
  *
  */
     $filter = new \Biboletin\Filter();
-
+/**
+ *
+ */
     $action = $filter->sanitizeInput(strtolower(trim($_POST['action'])));
-
+/**
+ *
+ */
     $dbs = new \DataBaseConnector();
-
+/**
+ *
+ */
     $mysqli = $dbs->setEngine('mysqli')->makeConnection();
-
+/**
+ *
+ */
     $user = new \Biboletin\User($mysqli);
     $hash = new \Biboletin\StringHasher('crypt', \Biboletin\Config::get('hashing', 'salt'));
 /**
@@ -51,7 +59,6 @@
 /**
  *
  */
-//    if ((trim($_POST['password']) !== '') || (trim($_POST['password']) !== null) || (empty($_POST['password']))) {
     if (isset($_POST['password'])) {
         $password = $hash->hashit($filter->sanitizeInput($_POST['password']));
         $user->setPassword($password);
@@ -60,11 +67,6 @@
  * Логин форма
  */
     if ($action === 'login') {
-        $hash = new \Biboletin\StringHasher('crypt', \Biboletin\Config::get('hashing', 'salt'));
-        $username = $filter->sanitizeInput($_POST['username']);
-        $password = $hash->hashit($filter->sanitizeInput($_POST['password']));
-
-        //    $user = new \Biboletin\User($mysqli);
         $data = ['response' => false];
         if ($user->checkUserExists($username, $password) === true) {
             $data['response'] = true;
@@ -75,7 +77,6 @@
  * Форма за регистрация
  */
     if ($action === 'register') {
-        //    $user = new \Biboletin\User($mysqli);
         $data['response'] = false;
         if ($user->checkUserExists($username, $password) === false) {
             $data['response'] = $user->addUser();
@@ -88,16 +89,12 @@
  * при зареждане на "Edit profile"
  */
     if ($action === 'get_user_data') {
-        //    $user = new \Biboletin\User($mysqli);
         $data['response'] = $user->getUser(\Biboletin\Session::get('user'));
-
         echo json_encode($data);
     }
 /**
  * Промяна данните на потребител
  */
     if ($action === 'edit_profile') {
-        //    $user = new \Biboletin\User($mysqli);
         $user->editUser();
-
     }

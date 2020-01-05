@@ -45,9 +45,7 @@ $(document).ready(function () {
             return false;
         }
 
-        // alert(decodeURIComponent($('#edituser_form :input[value != ""]').serialize() + '&action=edit_profile'));
-        // return false;
-        $.post('php/ajaxUsersResults.php', $('#edituser_form').serialize() + '&action=edit_profile&type=users')
+        $.post('php/ajaxUsersResults.php', $('#edituser_form').serialize() + '&action=edit_profile')
             .done(function (response) {
                 let data = JSON.parse(response);
 
