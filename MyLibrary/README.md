@@ -2,11 +2,11 @@
 
 Project is not finished.
 User can 
-- register, 
-- log on, 
-- edit profile info, 
+- register.
+- log on.
+- edit profile info.
 - add book info and image.
-- list added books
+- list added books.
 
 ### Used stack 
 1. PHP
@@ -17,4 +17,4 @@ User can
 6. CSS
 7. AJAX
 
-MySQL schemas is in `structure.sql`.
+MySQL schemas are in `structure.sql`.
