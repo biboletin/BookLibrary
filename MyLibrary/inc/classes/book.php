@@ -124,11 +124,32 @@ class Book
                         '" . $this->year . "', 
                         '" . $this->description . "', 
                         '" . \Biboletin\Session::get('user') . "')";
-        error_log($this->dbs->last_id);
+
         return $this->dbs->sqlQuery($sql);
     }
-    public function getBookById(){}
-    public function getAllBooks(){}
+
+    public function getMyBooks(): array
+    {
+        $sql = "SELECT 
+                        books.book_name,
+                        books.book_isbn,
+                        books.book_year,
+                        books.book_description,
+                        book_images.`file_name`,
+                        book_images.`file_path` 
+                    FROM
+                        books,
+                        book_images,
+                        users 
+                    WHERE users.id = '" . \Biboletin\Session::get('user') . "' 
+                        AND books.id = book_images.`book_id`";
+        $result = $this->dbs->sqlQuery($sql);
+        if ((empty($result)) || ($result === null)) {
+            return [];
+        }
+        return $result;
+    }
+
     /**
      *
      */

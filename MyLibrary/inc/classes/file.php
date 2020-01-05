@@ -4,13 +4,34 @@
 namespace Biboletin;
 
 
+/**
+ * Class FileUploader
+ * @package Biboletin
+ */
 class FileUploader
 {
+    /**
+     * @var
+     */
     private $name;
+    /**
+     * @var string
+     */
     private $imagePath;
+    /**
+     * @var string
+     */
     private $userId;
+    /**
+     * @var
+     */
     private $dbs;
 
+    /**
+     * FileUploader constructor.
+     * @param $db
+     * @throws \Exception
+     */
     public function __construct($db)
     {
         $this->dbs = $db;
@@ -21,6 +42,9 @@ class FileUploader
         }
     }
 
+    /**
+     * @return bool
+     */
     public function uploadImage(): bool
     {
         if (empty($_FILES)) {
@@ -35,12 +59,15 @@ class FileUploader
                         VALUES
                             ('" . $this->dbs->last_id . "', 
                             '" . $this->name . "', 
-                            '" . $filePath . "')";
+                            '" . str_replace('../', '', $filePath) . "')";
             return $this->dbs->sqlQuery($sql);
         }
         return false;
     }
 
+    /**
+     *
+     */
     public function __destruct()
     {
         $this->name = null;
