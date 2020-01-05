@@ -8,7 +8,7 @@ include_once "partials/menu_header.php";
             <div class="row">
                 <div class="center_div">
                     <h1 class="h3 mb-3 font-weight-normal">Add Book</h1>
-                    <form id="addbook_form" method="post">
+                    <form id="addbook_form" method="post" enctype="multipart/form-data">
                         <label for="book_name" class="sr-only">Name:</label>
                         <input type="text" name="book_name" id="book_name" class="form-control" placeholder="Name"/>
 
@@ -20,8 +20,8 @@ include_once "partials/menu_header.php";
 
                         <label for="description" class="sr-only">Description:</label>
                         <textarea name="description" id="description" cols="30" rows="5"></textarea>
-                        <div class="custom-file">
-                            <input type="file" name="password" id="password" class="custom-file-input" placeholder="Cover image"/>
+                        <div id="file_upload" class="custom-file">
+                            <input type="file" name="file" id="file" class="custom-file-input" placeholder="Cover image"/>
                             <label class="custom-file-label" for="inputGroupFile04">Cover image</label>
                         </div>
                         <hr/>

@@ -34,6 +34,7 @@ class MySQLiConnection implements SQLQuery
     {
     }
 
+    public $last_id;
     /**
      * Създаване на нова инстанция
      * @return object
@@ -42,7 +43,7 @@ class MySQLiConnection implements SQLQuery
     {
         self::$instance = null;
 
-        if (self::$instance == null) {
+        if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
@@ -93,7 +94,12 @@ class MySQLiConnection implements SQLQuery
         $result = [];
 
         if ($action[0] !== 'select') {
-            return (bool) self::$connection->query($sql);
+            $result = self::$connection->query($sql);
+
+            if($action[0] === 'insert'){
+                $this->last_id = self::$connection->insert_id;
+            }
+            return (bool) $result;
         }
 
         if ($action[0] === 'select') {

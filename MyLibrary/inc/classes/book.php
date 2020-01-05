@@ -124,9 +124,11 @@ class Book
                         '" . $this->year . "', 
                         '" . $this->description . "', 
                         '" . \Biboletin\Session::get('user') . "')";
+        error_log($this->dbs->last_id);
         return $this->dbs->sqlQuery($sql);
     }
-
+    public function getBookById(){}
+    public function getAllBooks(){}
     /**
      *
      */

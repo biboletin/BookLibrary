@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $('#add').click(function (e) {
         e.preventDefault();
 
@@ -24,15 +25,29 @@ $(document).ready(function () {
             return false;
         }
 
-        $.post('php/ajaxBooksResults.php', $('#addbook_form').serialize() + '&action=addBook')
-            .done(function (response) {
+        let formData = new FormData();
+        formData.append('file', $('form')[1].file.files[0]);
+        formData.append('book_name', bookName);
+        formData.append('isbn', isbn);
+        formData.append('year', year);
+        formData.append('description', description);
+        formData.append('action', 'addBook');
+
+        $.ajax({
+            url: 'php/ajaxBooksResults.php',
+            type: 'POST',
+            data: formData,
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,  // tell jQuery not to set contentType
+            success: function (response) {
                 let data = JSON.parse(response);
 
                 if (data.response === true) {
                     alert('Book added!');
                     return true;
                 }
-            });
+            }
+        });
     });
 
 });
